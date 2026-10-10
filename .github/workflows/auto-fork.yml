@@ -17,9 +17,11 @@ jobs:
 
       - name: Sync with Upstream
         run: |
+          set -x
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/OpenListTeam/OpenList-Worker.git
+          git remote -v
           git fetch upstream
           git merge upstream/main --ff-only
           git push origin main
