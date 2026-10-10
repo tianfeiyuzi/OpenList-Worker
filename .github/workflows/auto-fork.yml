@@ -2,7 +2,7 @@ name: Sync Fork with Upstream
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # 每6小时，可自行调整
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -21,10 +21,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/OpenListTeam/OpenList-Worker.git
           git fetch upstream
-          if git merge upstream/main --ff-only; then
-            git push origin main
-            echo "✅ Synced successfully"
-          else
-            echo "::error::❌ Diverged history detected. Please sync manually."
-            exit 1
-          fi
+          git merge upstream/main --ff-only
+          git push origin main
